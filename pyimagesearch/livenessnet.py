@@ -1,60 +1,52 @@
 # import the necessary packages
 from keras.models import Sequential
 from keras.layers.normalization import BatchNormalization
-from keras.layers.convolutional import Conv2D
 from keras.layers.convolutional import MaxPooling2D
+from keras.layers.convolutional import Conv2D
 from keras.layers.core import Activation
 from keras.layers.core import Flatten
 from keras.layers.core import Dropout
 from keras.layers.core import Dense
+from keras.layers import GlobalAveragePooling2D
+from keras.layers import AveragePooling2D
+from keras.layers import ZeroPadding2D
+from keras.layers import Input
+from keras.layers import add
+from keras.models import Model
 from keras import backend as K
+from keras.applications.resnet50 import ResNet50
+
+# from tensorflow.python.keras.models import Model
+# from tensorflow.python.keras.layers import Flatten, Dense, Dropout
+# from tensorflow.python.keras.applications import ResNet50
+# from tensorflow.python.keras.models import Sequential
 
 class LivenessNet:
 	@staticmethod
 	def build(width, height, depth, classes):
-		# initialize the model along with the input shape to be
-		# "channels last" and the channels dimension itself
-		model = Sequential()
-		inputShape = (height, width, depth)
-		chanDim = -1
 
-		# if we are using "channels first", update the input shape
-		# and channels dimension
-		if K.image_data_format() == "channels_first":
-			inputShape = (depth, height, width)
-			chanDim = 1
+		# net = ResNet50(include_top=False, weights='imagenet', input_tensor=None,
+		# 			   input_shape=(width, height, depth))
+		# res = net.output
+		# res = GlobalAveragePooling2D()(res)
+		# fc = Dense(classes, activation='softmax', name='fc1000')(res)
+		# model = Model(inputs=net.input, outputs=fc)
 
-		# first CONV => RELU => CONV => RELU => POOL layer set
-		model.add(Conv2D(16, (3, 3), padding="same",
-			input_shape=inputShape))
-		model.add(Activation("relu"))
-		model.add(BatchNormalization(axis=chanDim))
-		model.add(Conv2D(16, (3, 3), padding="same"))
-		model.add(Activation("relu"))
-		model.add(BatchNormalization(axis=chanDim))
-		model.add(MaxPooling2D(pool_size=(2, 2)))
-		model.add(Dropout(0.25))
 
-		# second CONV => RELU => CONV => RELU => POOL layer set
-		model.add(Conv2D(32, (3, 3), padding="same"))
-		model.add(Activation("relu"))
-		model.add(BatchNormalization(axis=chanDim))
-		model.add(Conv2D(32, (3, 3), padding="same"))
-		model.add(Activation("relu"))
-		model.add(BatchNormalization(axis=chanDim))
-		model.add(MaxPooling2D(pool_size=(2, 2)))
-		model.add(Dropout(0.25))
+		net = ResNet50(include_top=False, weights='imagenet', input_tensor=None,
+					   input_shape=(width, height, depth))
+		res = net.output
+		res = Flatten()(res)
+		res = Dropout(0.5)(res)
+		fc = Dense(classes, activation='softmax', name='fc2')(res)
+		model = Model(inputs=net.input, outputs=fc)
 
-		# first (and only) set of FC => RELU layers
-		model.add(Flatten())
-		model.add(Dense(64))
-		model.add(Activation("relu"))
-		model.add(BatchNormalization())
-		model.add(Dropout(0.5))
-
-		# softmax classifier
-		model.add(Dense(classes))
-		model.add(Activation("softmax"))
+		# model = Sequential()
+		# model.add(ResNet50(include_top=False, pooling='avg', weights='imagenet', input_shape=(width, height, depth)))
+		# model.add(Flatten())
+		# # model.add(BatchNormalization())
+		# model.add(Dense(classes, activation='softmax', name='fc2'))
 
 		# return the constructed network architecture
+
 		return model
