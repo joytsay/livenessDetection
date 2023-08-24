@@ -2,35 +2,57 @@
 
 * This code trains and implements liveness detection with video input
 
-* Modified original model to Resnet50 to achieve better accuracy (Thanks Jason Chu!)
+* Modified original model to Resnet50 to achieve better accuracy (Thanks Jason Chu)
 
 <p align="center">
-  <img src="https://github.com/joytsay/livenessDetection/blob/master/dataset/ezgif-1-085534fa4973.gif?raw=true" width="600">
+  <img src="dataset\ezgif-1-085534fa4973.gif?raw=true" width="600">
 </p>
 <br>
 <br>
 
-* Install steps:
+## Setup Environment:
+```
+conda create -n liveness python=3.8
+conda activate liveness
+pip install -r requirements.txt
+```
 
-Use Anaconda3
+## Train & Deploy steps:
+All Tested on Windows 10 conda environment
+Please install miniconda or Anaconda first
+### Cmd Line
 
-pip install imutils
+```
+# data pre-process
+python gather_examples.py -i ./videos/fake.mp4 -o ./dataset/fake -d ./face_detector -c 0.9 -s 1 -f 0
+python gather_examples.py -i ./videos/real.mp4 -o ./dataset/real -d ./face_detector -c 0.9 -s 1 -f 0
+python gather_examples.py -i ./videos/mask.mp4 -o ./dataset/mask -d ./face_detector -c 0.9 -s 1 -f 0
 
-pip install keras
+# train model
+python train_liveness.py -d ./dataset -m liveness.model -l le.pickle
 
-pip install --upgrade h5py
+# run liveness model on test video
+python liveness_demo.py -m liveness.model -l le.pickle -d ./face_detector -c 0.5
+press "q" to quit
 
-pip install opencv-python
+# run liveness model on web cam
+python webcam.py
 
-* Train & Deploy steps:
+```
 
-use ./gather.bat to get train image snapshots from video in ./videos folder. (images will be stored in ./dataset/fake & real)
+### Auto run bat files
+run 01_XXX.bat files (01~05) sequentially:
+```
+01_install.bat
+02_gather.bat
+03_trainLiveness.bat
+04_runLiveness.bat
+05_webcam.bat
+```
 
-run ./trainLiveness.bat to train images from ./dataset
 
-run ./runLiveness.bat to see implementaion of Liveness Detection via video input (-c 0.5 is the threshold of "Fake" and "Liveness")
-
-# The following link is the original pyimagesearch liveness-detection-with-opencv example code:
+## Refernce
+ The following link is the original pyimagesearch liveness-detection-with-opencv example code:
 https://www.pyimagesearch.com/2019/03/11/liveness-detection-with-opencv
 
 ### Find this project useful ? :heart:

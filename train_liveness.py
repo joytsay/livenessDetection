@@ -12,7 +12,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 from keras.preprocessing.image import ImageDataGenerator
 from keras.optimizers import Adam
-from keras.utils import np_utils
+from keras.src.utils import np_utils
 from imutils import paths
 import matplotlib.pyplot as plt
 import numpy as np
@@ -80,7 +80,7 @@ aug = ImageDataGenerator(rotation_range=20, zoom_range=0.15,
 
 # initialize the optimizer and model
 print("[INFO] compiling model...")
-opt = Adam(lr=INIT_LR, decay=INIT_LR / EPOCHS)
+opt = Adam(learning_rate=INIT_LR)
 model = LivenessNet.build(width=32, height=32, depth=3,
 	classes=len(le.classes_))
 model.compile(loss="binary_crossentropy", optimizer=opt,
@@ -112,7 +112,6 @@ plt.style.use("ggplot")
 plt.figure()
 plt.plot(np.arange(0, EPOCHS), H.history["loss"], label="train_loss")
 plt.plot(np.arange(0, EPOCHS), H.history["val_loss"], label="val_loss")
-plt.plot(np.arange(0, EPOCHS), H.history["acc"], label="train_acc")
 plt.plot(np.arange(0, EPOCHS), H.history["val_acc"], label="val_acc")
 plt.title("Training Loss and Accuracy on Dataset")
 plt.xlabel("Epoch #")

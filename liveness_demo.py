@@ -39,7 +39,7 @@ le = pickle.loads(open(args["le"], "rb").read())
 
 # initialize the video stream and allow the camera sensor to warmup
 print("[INFO] starting video stream...")
-vs = VideoStream(src=0).start()
+cap = cv2.VideoCapture('videos/testLiveness.mp4')
 time.sleep(2.0)
 fourcc = cv2.VideoWriter_fourcc(*'MP4V')
 out = cv2.VideoWriter('LivenessResult.mp4', fourcc, 30.0, (640,480))
@@ -48,7 +48,7 @@ out = cv2.VideoWriter('LivenessResult.mp4', fourcc, 30.0, (640,480))
 while True:
 	# grab the frame from the threaded video stream and resize it
 	# to have a maximum width of 600 pixels
-	frame = vs.read()
+	ret, frame = cap.read()
 	frame = imutils.resize(frame, height=480, width=640)
 
 	# grab the frame dimensions and convert it to a blob
