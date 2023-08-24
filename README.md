@@ -10,17 +10,29 @@
 <br>
 <br>
 
+## Pre-Trained Model and Training/Test Videos:
+Download from here and put in root folder (`/livenessDetection`)
+https://drive.google.com/drive/folders/1Uj49JwLSAY4Q4v6UVMNF0u9hobGrJoWC?usp=sharing
+
 ## Setup Environment:
+All Tested on Windows 10 conda environment
+Please install miniconda or Anaconda first
+
+### Option 1: Auto run bat files
+run 01_XXX.bat files (01~05) sequentially:
+```
+01_install.bat
+02_gather.bat
+03_trainLiveness.bat
+04_runLiveness.bat
+05_webcam.bat
+```
+### Option 2: Cmd Line
 ```
 conda create -n liveness python=3.8
 conda activate liveness
 pip install -r requirements.txt
 ```
-
-## Train & Deploy steps:
-All Tested on Windows 10 conda environment
-Please install miniconda or Anaconda first
-### Cmd Line
 
 ```
 # data pre-process
@@ -40,15 +52,6 @@ python webcam.py
 
 ```
 
-### Auto run bat files
-run 01_XXX.bat files (01~05) sequentially:
-```
-01_install.bat
-02_gather.bat
-03_trainLiveness.bat
-04_runLiveness.bat
-05_webcam.bat
-```
 
 
 ## Refernce
