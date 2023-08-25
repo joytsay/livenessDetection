@@ -1,18 +1,17 @@
 # Liveness Detection
 
-* This code trains and implements liveness detection with video input
+* This code trains and implements liveness detection with video from the [pyimagesearch blog](https://www.pyimagesearch.com/2019/03/11/liveness-detection-with-opencv)
 
-* Modified original model to Resnet50 to achieve better accuracy (Thanks Jason Chu)
+* We modified the blog's original shallow CNN model to Resnet50 that can achieve better accuracy
 
 <p align="center">
-  <img src="dataset\ezgif-1-085534fa4973.gif?raw=true" width="600">
+  <img src="https://github.com/joytsay/livenessDetection/blob/master/dataset/ezgif-1-085534fa4973.gif?raw=true" width="600">
 </p>
 <br>
 <br>
 
-## Pre-Trained Model and Training/Test Videos:
-Download from here and put in root folder (`/livenessDetection`)
-https://drive.google.com/drive/folders/1Uj49JwLSAY4Q4v6UVMNF0u9hobGrJoWC?usp=sharing
+## Pre-Trained Model and Train/Test Videos:
+Download from [here](https://drive.google.com/drive/folders/1Uj49JwLSAY4Q4v6UVMNF0u9hobGrJoWC?usp=sharing) and put in root folder (`/livenessDetection`)
 
 ## Setup Environment:
 All Tested on Windows 10 conda environment
