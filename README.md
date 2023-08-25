@@ -1,6 +1,6 @@
 # Liveness Detection
 
-* This code trains and implements liveness detection with video from the [pyimagesearch blog](https://www.pyimagesearch.com/2019/03/11/liveness-detection-with-opencv)
+* This code trains and implements via video from the [pyimagesearch liveness detection blog](https://www.pyimagesearch.com/2019/03/11/liveness-detection-with-opencv)
 
 * We modified the blog's original shallow CNN model to Resnet50 that can achieve better accuracy
 
@@ -15,7 +15,7 @@ Download from [here](https://drive.google.com/drive/folders/1Uj49JwLSAY4Q4v6UVMN
 
 ## Setup Environment:
 All Tested on Windows 10 conda environment
-Please install miniconda or Anaconda first
+Please install [Miniconda](https://docs.conda.io/en/latest/miniconda.html) or [Anaconda](https://www.anaconda.com/download) first
 
 ### Option 1: Auto run bat files
 run 01_XXX.bat files (01~05) sequentially:
@@ -53,9 +53,8 @@ python webcam.py
 
 
 
-## Refernce
- The following link is the original pyimagesearch liveness-detection-with-opencv example code:
-https://www.pyimagesearch.com/2019/03/11/liveness-detection-with-opencv
+## Reference
+ The following link is the original pyimagesearch [liveness-detection-with-opencv example code](https://www.pyimagesearch.com/2019/03/11/liveness-detection-with-opencv)
 
 ### Find this project useful ? :heart:
 * Support it by clicking the :star: button on the upper right of this page. :v:
@@ -64,7 +63,7 @@ https://www.pyimagesearch.com/2019/03/11/liveness-detection-with-opencv
 * The example has been taken from pyimagesearch liveness-detection-with-opencv example and modified model to Resnet50
 
 ### License
-Copyright (C) 2020 Adrian Rosebrock, PyImageSearch, https://www.pyimagesearch.com/2019/03/11/liveness-detection-with-opencv/, accessed on March 11, 2019
+Copyright (C) 2020 Adrian Rosebrock, [PyImageSearch](https://www.pyimagesearch.com/2019/03/11/liveness-detection-with-opencv/), accessed on March 11, 2019
 
 ### Contributing to livenessDetection
 Just make pull request. Thank you!
