@@ -10,13 +10,24 @@
 <br>
 <br>
 
+## Get this code:
+```
+git clone https://github.com/joytsay/livenessDetection.git
+cd livenessDetection
+```
+
 ## Pre-Trained Model and Train/Test Videos:
 Download from [here](https://drive.google.com/drive/folders/1Uj49JwLSAY4Q4v6UVMNF0u9hobGrJoWC?usp=sharing) and put in root folder (`/livenessDetection`)
 
 ## Setup Environment:
-All Tested on Windows 10 conda environment
-Please install [Miniconda](https://docs.conda.io/en/latest/miniconda.html) or [Anaconda](https://www.anaconda.com/download) first
+### Tested on Windows 10 [mini-conda](https://docs.conda.io/en/latest/miniconda.html) environment via
 
+[Miniconda3-latest-Windows-x86_64.exe](https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe)
+
+### Tested on MacOS M2 [mini-forge](https://github.com/conda-forge/miniforge) environment via
+`brew install miniforge`
+
+## Install Code:
 ### Option 1: Auto run bat files
 run 01_XXX.bat files (01~05) sequentially:
 ```
@@ -47,7 +58,7 @@ python liveness_demo.py -m liveness.model -l le.pickle -d ./face_detector -c 0.5
 press "q" to quit
 
 # run liveness model on web cam
-python webcam.py
+python webcam.py -m liveness.model -l le.pickle -d ./face_detector -c 0.5
 
 ```
 
